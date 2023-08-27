@@ -1,0 +1,43 @@
+﻿@model IEnumerable<dot_net_junior.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Clientes</h1>
+
+
+<div class="d-flex justify-content-center">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Tipo de Documento</th>
+                <th scope="col">Documento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any()) //Se conter algo dentro da model
+            {
+                foreach (Cliente cliente in Model)
+                {
+                    <tr>
+                        <th scope="row">@cliente.ID</th>
+                        <td>@cliente.Nome</td>
+                        <td>@cliente.TipoDocumento</td>
+                        <td>@cliente.CPF_CNPJ</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-secondary" asp-route-id="@cliente.ID" asp-controller="Cliente" asp-action="Details">Mais Info</a>|
+                                <a role="button" class="btn btn-primary" asp-route-id="@cliente.ID" asp-controller="Cliente" asp-action="Edit">Editar</a>|
+                                <a role="button" class="btn btn-danger" asp-route-id="@cliente.ID" asp-controller="Cliente" asp-action="Delete">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>
