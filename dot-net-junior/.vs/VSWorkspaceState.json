@@ -5,6 +5,6 @@
     "\\Views",
     "\\Views\\Contato"
   ],
-  "SelectedNode": "\\Views\\Contato\\Create.cshtml",
+  "SelectedNode": "\\Controllers\\ClienteController.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -20,7 +20,6 @@
 
 <!--------------------------------------------------------------------------->
 
-
 <form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="d-flex justify-content-center">
@@ -49,10 +48,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CPF_CNPJ" class="control-label"></label>
-                    <input asp-for="CPF_CNPJ"  class="form-control" />
+                    <input asp-for="CPF_CNPJ" class="form-control" maxlength="14" />
                     <span asp-validation-for="CPF_CNPJ" class="text-danger"></span>
-                    <small id="Observacao" class="form-text text-muted">OBS: Se informar CNPJ seu endereço tem que ser Comercial.</small>
+                    <small id="Observacao" class="form-text text-danger">OBS: Se informar CNPJ seu endereço tem que ser Comercial.</small>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">Proximo</button>

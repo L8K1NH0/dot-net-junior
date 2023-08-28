@@ -13,8 +13,7 @@ namespace dot_net_junior
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<BancoContext>(options => options.UseSqlServer
-               ("Data Source=DESKTOP-KTNPFLV;Initial Catalog=DBsistemaCliente;Integrated Security=true ;TrustServerCertificate = True"));
-
+            (builder.Configuration.GetConnectionString("StrConecxao")));
 
             var app = builder.Build();
 

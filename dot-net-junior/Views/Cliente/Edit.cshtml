@@ -42,9 +42,8 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="CPF_CNPJ" class="control-label"></label>
-                    <input asp-for="CPF_CNPJ" class="form-control" />
-                    <span asp-validation-for="CPF_CNPJ" class="text-danger"></span>
-                    @*<input asp-for="CPF_CNPJ" class="form-control" id="InputCPF_CNPJ" placeholder="Digite CPF ou CNPJ" oninput="Validacao_CPF_CNPJ" autocomplete="off" max="14" required>*@
+                    <input asp-for="CPF_CNPJ" class="form-control" maxlength="14" />
+                    <span asp-validation-for="CPF_CNPJ" class="text-danger"></span>                   
                     <small id="Observacao" class="form-text text-muted">OBS: Se informar CNPJ seu endereço tem que ser Comercial.</small>
                 </div>
 
@@ -61,7 +60,7 @@
         <div class="card-body">
             <h5 class="card-title">Editar:</h5>
             <div>
-                <a class="btn btn-secondary" asp-controller="Contato" asp-action="Edit" asp-route-id="@Model.ID" role="button">Contato</a>
+                <a class="btn btn-secondary" asp-controller="Contato" asp-action="Index" asp-route-id="@Model.ID" role="button">Contato</a>
                 <a class="btn btn-secondary" asp-controller="Endereco" asp-action="Edit" asp-route-id="@Model.ID" role="button">Endereço</a>
             </div>
         </div>

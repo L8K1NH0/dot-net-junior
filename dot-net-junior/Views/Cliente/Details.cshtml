@@ -40,17 +40,11 @@
 <div class="d-flex justify-content-center">
     <div class="card" style="width: 35rem;">
         <div class="card-body">
-            <h5 class="card-title">Editar:</h5>
+            <h5 class="card-title">Informações:</h5>
             <div>
-                <a class="btn btn-secondary" asp-controller="Contato" asp-action="Details" asp-route-id="@Model.ID" role="button">Contato</a>
+                <a class="btn btn-secondary" asp-controller="Contato" asp-action="Index" asp-route-id="@Model.ID" role="button">Contato</a>
                 <a class="btn btn-secondary" asp-controller="Endereco" asp-action="Details" asp-route-id="@Model.ID" role="button">Endereço</a>
             </div>
         </div>
     </div>
-</div>
-
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

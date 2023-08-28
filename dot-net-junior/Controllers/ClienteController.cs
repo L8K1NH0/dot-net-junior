@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using dot_net_junior.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using dot_net_junior.LogicaNegocio;
 
 namespace dot_net_junior.Controllers
 {
@@ -58,14 +59,30 @@ namespace dot_net_junior.Controllers
         public async Task<IActionResult> Create([Bind("ID,Nome,CPF_CNPJ,TipoDocumento")] Cliente cliente)
         {
             string CPF_CNPJ = cliente.CPF_CNPJ;
-
             var DocExistente = _context.Cliente.FirstOrDefault(c => c.CPF_CNPJ == CPF_CNPJ);
+
+            bool res;
+
+            if (cliente.TipoDocumento == "CPF")
+            {                
+                res = ValidaCPF.IsCpf(CPF_CNPJ);
+            }
+            else
+            {
+                res = ValidaCNPJ.IsCnpj(CPF_CNPJ);
+            }
+
+
 
             try
             {
                 if (DocExistente != null)
                 {
                     TempData["MensagemErro"] = $"Ops, Não foi possivel realizar o cadastro do cliente. Ja existe um conta com este documento.";               
+                }
+                else if (res == false) 
+                {
+                    TempData["MensagemErro"] = $"Ops, Documento invalido";
                 }
                 else
                 {

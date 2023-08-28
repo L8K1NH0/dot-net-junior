@@ -20,12 +20,11 @@
                 <div class="d-flex justify-content-center">
                     <div class="card" style="width: 35rem;">
                         <div class="card-body">
-
                             <div>
                                 <div class="form-check form-check-inline">
-                                    <input asp-for="TipoEndereco" class="form-check-input" type="radio" name="TipoEndereco" id="RadioResidencial" value="Residencial">
+                                    <input asp-for="TipoEndereco" class="form-check-input" type="radio" name="TipoEndereco" id="RadioResidencial" value="@ViewBag.EnderecoCPF">
                                     <span asp-validation-for="TipoEndereco" class="text-danger"></span>
-                                    <label class="form-check-label" for="inlineRadioCPF">Residencial</label>
+                                    <label class="form-check-label" for="inlineRadioCPF">@ViewBag.EnderecoCPF</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input asp-for="TipoEndereco" class="form-check-input" type="radio" name="TipoEndereco" id="RadioComercial" value="Comercial">

@@ -34,18 +34,20 @@
                     <div class="d-flex justify-content-center">
                         <div class="p-3">
                             <label asp-for="DDD" class="control-label"></label>
-                            <input asp-for="DDD" class="form-control" />
+                        <input asp-for="DDD" class="form-control" maxlength="3" />
                             <span asp-validation-for="DDD" class="text-danger"></span>
                         </div>
                         <div class="p-3">
                             <label asp-for="NumeroContato" class="control-label"></label>
-                            <input asp-for="NumeroContato" class="form-control" />
+                        <input asp-for="NumeroContato" class="form-control" maxlength="10" />
                             <span asp-validation-for="NumeroContato" class="text-danger"></span>
                         </div>
                     </div>              
 
                 <div>
                     <input type="submit" value="Finalizar" class="btn btn-primary" />
+
+                    <button type="submit" class="btn btn-primary btn-block" asp-controller="Contato" asp-action="AddContato">Adicionar mais contatos</button>
 
                     <input type="hidden" value="@ViewBag.UltimoUsuarioId" asp-for="IDcliente" />
 

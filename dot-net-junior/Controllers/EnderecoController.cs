@@ -50,10 +50,22 @@ namespace dot_net_junior.Controllers
             int ultimoUsuarioId = _context.Cliente.OrderByDescending(u => u.ID).Select(u => u.ID).FirstOrDefault();
             ViewBag.UltimoUsuarioId = ultimoUsuarioId;
 
-            //string sqlCPF_CNPJ = $"select CPF_CNPJ from Cliente  Where CPF_CNPJ = '{CPF_CNPJ}'";
-            //_context.Database.ExecuteSqlRaw(sqlCPF_CNPJ);
+            var tipoDoc = _context.Cliente.FirstOrDefault(c => c.ID == ultimoUsuarioId);
 
-            //ViewBag.tipo = tipo;
+            if (tipoDoc != null)
+            {
+                string TipoDocumento = tipoDoc.TipoDocumento;
+
+                if (TipoDocumento == "CPF")
+                {
+                    ViewBag.EnderecoCPF = "Residencial";
+                }
+                else if (TipoDocumento == "CNPJ")
+                {
+                    ViewBag.EnderecoCPF = "Comercial";
+                }
+            }
+
 
             return View();
         }

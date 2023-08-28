@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using dot_net_junior.Models;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace dot_net_junior.Controllers
 {
@@ -20,11 +21,23 @@ namespace dot_net_junior.Controllers
         }
 
         // GET: Contato
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int ID)
         {
-            return _context.Contato != null ? 
-                          View(await _context.Contato.ToListAsync()) :
-                          Problem("Entity set 'BancoContext.Contato'  is null.");
+            //return _context.Contato != null ? 
+            //              View(await _context.Contato.ToListAsync()) :
+            //              Problem("Entity set 'BancoContext.Contato'  is null.");
+
+            var contatosDoCliente = await _context.Contato.Where(c => c.IDcliente == ID).ToListAsync();
+
+            if (contatosDoCliente != null)
+            {
+                return View(contatosDoCliente);
+            }
+            else
+            {
+                return Problem($"Os contatos do cliente com ID {ID} está vazio.");
+            }
+
         }
 
         // GET: Contato/Details/5
@@ -61,11 +74,34 @@ namespace dot_net_junior.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,DDD,NumeroContato,Tipo,IDcliente")] ContatoModel contato)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(contato);
+                    await _context.SaveChangesAsync();
+                    TempData["MensagemSucesso"] = $"Cliente Cadastrado com Sucesso";
+                    return RedirectToAction("Index","Cliente");
+
+                }
+            }
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, Não foi possivel realizar o cadastro do cliente. Detalhe: {erro.Message}";                
+            }
+            return RedirectToAction("Index", "Cliente");
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddContato([Bind("ID,DDD,NumeroContato,Tipo,IDcliente")] ContatoModel contato)
+        {
             if (ModelState.IsValid)
             {
                 _context.Add(contato);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index","Cliente");
+                return RedirectToAction("Create", "Contato");
             }
             return View(contato);
         }
