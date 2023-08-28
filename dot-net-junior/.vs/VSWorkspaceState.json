@@ -3,8 +3,8 @@
     "",
     "\\Controllers",
     "\\Views",
-    "\\Views\\Contato"
+    "\\Views\\Cliente"
   ],
-  "SelectedNode": "\\Controllers\\ClienteController.cs",
+  "SelectedNode": "\\Views\\Cliente\\Create.cshtml",
   "PreviewInSolutionExplorer": false
 }

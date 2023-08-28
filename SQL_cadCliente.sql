@@ -40,3 +40,11 @@ IDCliente INT NOT NULL
 CONSTRAINT PK_ID_telCel PRIMARY KEY (ID)
 CONSTRAINT FK_IDC_liente FOREIGN KEY (IDCliente) REFERENCES Cliente (ID)
 )
+
+select * from Cliente
+select * from Contato
+select * from Endereco
+
+UPDATE Cliente SET Nome = 'CR4zY' WHERE ID= 1	
+
+UPDATE Endereco SET Rua = 'Rua 1' WHERE ID= 1

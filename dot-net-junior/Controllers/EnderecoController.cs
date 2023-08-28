@@ -114,8 +114,29 @@ namespace dot_net_junior.Controllers
             {
                 try
                 {
-                    _context.Update(endereco);
-                    await _context.SaveChangesAsync();
+                    string sqlRua = $"UPDATE Endereco SET Rua = '{endereco.Rua}' WHERE ID= {endereco.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlRua);
+
+                    string sqlNumero = $"UPDATE Endereco SET Numero = '{endereco.Numero}' WHERE ID= {endereco.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlNumero);
+
+                    string sqlCEP = $"UPDATE Endereco SET CEP = '{endereco.CEP}' WHERE ID= {endereco.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlCEP);
+
+                    string sqlBairro = $"UPDATE Endereco SET Bairro = '{endereco.Bairro}' WHERE ID= {endereco.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlBairro);
+
+                    string sqlCidade = $"UPDATE Endereco SET Cidade = '{endereco.Cidade}' WHERE ID= {endereco.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlCidade);
+
+                    string sqlTipoEndereco = $"UPDATE Endereco SET TipoEndereco = '{endereco.TipoEndereco}' WHERE ID= {endereco.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlTipoEndereco);
+
+                    TempData["MensagemSucesso"] = $"Endereço editado com Sucesso";
+
+
+                    //_context.Update(endereco);
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -128,9 +149,9 @@ namespace dot_net_junior.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Cliente");
             }
-            return View(endereco);
+            return RedirectToAction("Index", "Cliente");
         }
 
         // GET: Endereco/Delete/5

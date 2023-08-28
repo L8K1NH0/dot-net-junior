@@ -66,6 +66,7 @@ namespace dot_net_junior.Controllers
             ViewBag.UltimoUsuarioId = ultimoUsuarioId;
 
             return View();
+
         }
 
         // POST: Contato/Create
@@ -136,8 +137,20 @@ namespace dot_net_junior.Controllers
             {
                 try
                 {
-                    _context.Update(contato);
-                    await _context.SaveChangesAsync();
+                    string sqlDDD = $"UPDATE Contato SET DDD = '{contato.DDD}' WHERE ID= {contato.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlDDD);
+
+                    string sqlNumeroContato = $"UPDATE Contato SET NumeroContato = '{contato.NumeroContato}' WHERE ID= {contato.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlNumeroContato);
+
+                    string sqlTipo = $"UPDATE Contato SET Tipo = '{contato.Tipo}' WHERE ID= {contato.ID}";
+                    _context.Database.ExecuteSqlRaw(sqlTipo);
+
+                    TempData["MensagemSucesso"] = $"Contato editado com Sucesso";
+
+
+                    //_context.Update(contato);
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -150,9 +163,9 @@ namespace dot_net_junior.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Cliente");
             }
-            return View(contato);
+            return RedirectToAction("Index","Cliente");
         }
 
         // GET: Contato/Delete/5

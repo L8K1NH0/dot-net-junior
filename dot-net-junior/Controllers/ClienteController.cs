@@ -128,7 +128,7 @@ namespace dot_net_junior.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,CPF_CNPJ,TipoDocumento")] Cliente cliente)
-        {
+        {            
             if (id != cliente.ID)
             {
                 return NotFound();
@@ -140,6 +140,7 @@ namespace dot_net_junior.Controllers
                 {
                     _context.Update(cliente);
                     await _context.SaveChangesAsync();
+                    TempData["MensagemSucesso"] = $"Editado com Sucesso";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -197,6 +198,7 @@ namespace dot_net_junior.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["MensagemSucesso"] = $"Conta apagada com Sucesso";
             return RedirectToAction(nameof(Index));
         }
 

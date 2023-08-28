@@ -9,7 +9,7 @@
     <div class="alert alert-primary" role="alert">
         <button type="button" class="btn btn-danger btn-sm close-alert">X</button>
         @TempData["MensagemSucesso"]
-    </div>
+    </div>    
 }
 
 @if (TempData["MensagemErro"] != null)
@@ -20,6 +20,7 @@
 
     </div>
 }
+
 
 <h1>Lista de Clientes</h1>
 
@@ -46,8 +47,8 @@
                         <td>@cliente.CPF_CNPJ</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a role="button" class="btn btn-secondary" asp-route-id="@cliente.ID" asp-controller="Cliente" asp-action="Details">Mais Info</a> |  
-                                <a role="button" class="btn btn-primary" asp-route-id="@cliente.ID" asp-controller="Cliente" asp-action="Edit">Editar</a> | 
+                                <a role="button" class="btn btn-secondary" asp-route-id="@cliente.ID" asp-controller="Cliente" asp-action="Details">Mais Info</a> |
+                                <a role="button" class="btn btn-primary" asp-route-id="@cliente.ID" asp-controller="Cliente" asp-action="Edit">Editar</a> |
                                 <a role="button" class="btn btn-danger" asp-route-id="@cliente.ID" asp-controller="Cliente" asp-action="Delete">Excluir</a>
                             </div>
                         </td>
