@@ -4,6 +4,15 @@
     ViewData["Title"] = "Create";
 }
 
+@if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert">X</button>
+            @TempData["MensagemErro"]
+
+        </div>
+    }
+
 <h1>Criar</h1>
 
 <h4>Cliente</h4>

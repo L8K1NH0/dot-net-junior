@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using dot_net_junior.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace dot_net_junior.Controllers
 {
@@ -56,14 +57,38 @@ namespace dot_net_junior.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Nome,CPF_CNPJ,TipoDocumento")] Cliente cliente)
         {
-            if (ModelState.IsValid)
-            {                
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();                
-                return RedirectToAction("Create","Endereco");
+            string CPF_CNPJ = cliente.CPF_CNPJ;
 
+            var DocExistente = _context.Cliente.FirstOrDefault(c => c.CPF_CNPJ == CPF_CNPJ);
+
+            try
+            {
+                if (DocExistente != null)
+                {
+                    TempData["MensagemErro"] = $"Ops, Não foi possivel realizar o cadastro do cliente. Ja existe um conta com este documento.";               
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        _context.Add(cliente);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Create", "Endereco");
+
+                    }
+                }
+                return View(cliente);
             }
-            return View(cliente);
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, Não foi possivel realizar o cadastro do cliente. Detalhe: {erro.Message}";
+                return View(cliente);
+            }
+
+
+
+
+
         }
 
         // GET: Cliente/Edit/5

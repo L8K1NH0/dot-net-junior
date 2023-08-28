@@ -3,6 +3,11 @@
 
 // Write your JavaScript code.
 
+$('.close-alert').click(function () {
+    $('.alert').hide('hide');
+})
+
+
 
 function validaCpfCnpj(val) {
     if (val.length == 14) {

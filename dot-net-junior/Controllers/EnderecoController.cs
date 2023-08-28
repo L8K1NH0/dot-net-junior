@@ -48,8 +48,12 @@ namespace dot_net_junior.Controllers
         public IActionResult Create()
         {
             int ultimoUsuarioId = _context.Cliente.OrderByDescending(u => u.ID).Select(u => u.ID).FirstOrDefault();
-
             ViewBag.UltimoUsuarioId = ultimoUsuarioId;
+
+            //string sqlCPF_CNPJ = $"select CPF_CNPJ from Cliente  Where CPF_CNPJ = '{CPF_CNPJ}'";
+            //_context.Database.ExecuteSqlRaw(sqlCPF_CNPJ);
+
+            //ViewBag.tipo = tipo;
 
             return View();
         }
