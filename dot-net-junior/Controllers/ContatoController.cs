@@ -82,14 +82,18 @@ namespace dot_net_junior.Controllers
                     _context.Add(contato);
                     await _context.SaveChangesAsync();
                     TempData["MensagemSucesso"] = $"Cliente Cadastrado com Sucesso";
+                    TempData.Keep("MensagemSucesso");
                     return RedirectToAction("Index","Cliente");
 
                 }
             }
             catch (Exception erro)
             {
-                TempData["MensagemErro"] = $"Ops, Não foi possivel realizar o cadastro do cliente. Detalhe: {erro.Message}";                
+                TempData["MensagemErro"] = $"Ops, Não foi possivel realizar o cadastro do cliente. Detalhe: {erro.Message}";       
+                TempData.Keep("MensagemErro");
+
             }
+            
             return RedirectToAction("Index", "Cliente");
             
         }
@@ -147,6 +151,7 @@ namespace dot_net_junior.Controllers
                     _context.Database.ExecuteSqlRaw(sqlTipo);
 
                     TempData["MensagemSucesso"] = $"Contato editado com Sucesso";
+                    TempData.Keep("MensagemSucesso");
 
 
                     //_context.Update(contato);
